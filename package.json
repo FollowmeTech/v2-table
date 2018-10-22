@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/v2-table",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "A simple table component based Vue 2.x",
   "author": "dwqs",
   "license": "MIT",
