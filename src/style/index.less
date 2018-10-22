@@ -71,7 +71,8 @@
 }
 
 .v2-table__cell {
-    border-bottom: 1px solid @border-regular-color;
+    //border-bottom: 1px solid @border-regular-color;
+    border-bottom: none;
     cursor: default;
     font-size: @normal-font-size;
     user-select: none;
@@ -226,16 +227,19 @@
 .v2-table__pagination-box {
     position: relative;
     width: 100%;
-    margin-top: 20px; 
+    margin-top: 20px;
     text-align: right;
     font-size: 0;
+    height: 32px;
+    vertical-align: middle;
+    padding: 7px 0;
     .pagination-text-info {
         position: absolute;
-        left: 0;
-        top: 0;
+        left: 0px;
+        top: 7px;
         font-size: @normal-font-size;
         color: @color-regular2;
-        line-height: 32px;
+        line-height: 18px;
     }
 }
 
@@ -245,17 +249,18 @@
     .page {
         cursor: pointer;
         display: inline-block;
-        padding: 0 10px;
-        height: 32px;
-        line-height: 32px;
-        margin-left: 5px;
+        height: 18px;
+        text-align: center;
         font-size: @normal-font-size;
         color: @color-regular;
-        border: 1px solid @border-light-color3;
-        background: @background-color-white;
-        &:hover {
-            border-color: @color-light;
-            color: @color-light;
+        &:hover{
+            color: #ff6200;
+        }
+        .svg-icon{
+            width: 8px;
+            height: 15px;
+            color: #DDDDDD;
+            margin-top: 1px;
         }
         &.disabled {
             cursor: not-allowed;
@@ -264,6 +269,38 @@
                 border-color: @border-light-color4;
             }
         }
+        &.cur-page{
+            background: @color-light;
+            border-radius: 50%;
+            color: white;
+        }
+        &.prev-page, &.next-page{
+            padding: 1px 5px;
+            height: 18px;
+            display: inline;
+            clear: both;
+            margin-left: 15px;
+            svg{
+                vertical-align: middle;
+                color: #A1A4AD;
+                &:hover{
+                    color: @color-light;
+                }
+            }
+            &.disabled {
+                svg{
+                    cursor: not-allowed;
+                    color: #DDDDDD;
+                }
+            }
+        }
+    }
+    .total{
+        font-size: 14px;
+        color: #999999;
+        display: inline-block;
+        line-height: 18px;
+        margin-left: 20px;
     }
     ul {
         list-style: none;
@@ -271,6 +308,10 @@
         margin: 0;
         font-size: 0;
         display: inline-block;
+        li{
+            margin-left: 15px;
+            min-width: 18px;
+        }
         .cur-page {
             border-color: @color-light;
             background-color: @color-light;

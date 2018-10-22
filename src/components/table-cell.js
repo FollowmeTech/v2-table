@@ -19,7 +19,7 @@ export default {
                 'height': height + 'px'
             }
         };
-        
+
         if (column.type === 'selection') {
             const box = createElement(CheckBox, {
                 props: {
@@ -41,7 +41,8 @@ export default {
                     'cell': true
                 }
             }, column.$scopedSlots.default({
-                row: row
+                row: row,
+                index: rowIndex
             }))]);
         }
 

@@ -8,40 +8,40 @@
         <div class="v2-table__table-wrapper">
             <div class="v2-table__table-container" ref="container">
                 <!-- 解耦 checkbox 和 table 在DOM结构上的耦合-->
-                <checkboxList v-if="selectionColumn.length > 0" 
-                    :column="selectionColumn[0]" 
-                    :left="scrollLeft"
-                    :hoverRowIndex="hoverRowIndex" 
-                    :top="scrollTop">
+                <checkboxList v-if="selectionColumn.length > 0"
+                              :column="selectionColumn[0]"
+                              :left="scrollLeft"
+                              :hoverRowIndex="hoverRowIndex"
+                              :top="scrollTop">
                 </checkboxList>
                 <!-- header -->
-                <div class="v2-table__header-wrapper" ref="header" 
-                    :style="{width: isContainerScroll ? bodyWidth + 'px' : '100%'}"
+                <div class="v2-table__header-wrapper" ref="header"
+                     :style="{width: isContainerScroll ? bodyWidth + 'px' : '100%'}"
                 >
                     <table-header
-                        :style="{ width: bodyWidth + 'px' }"
-                        :columns="columns" 
-                        :sort="sort"
-                        :border="border">
+                            :style="{ width: bodyWidth + 'px' }"
+                            :columns="columns"
+                            :sort="sort"
+                            :border="border">
                     </table-header>
                 </div>
 
                 <!-- body -->
                 <!-- :style="{width: !isContainerScroll ? contentWidth + 'px' : '100%', marginTop: contentMarginTop + 'px'}" -->
                 <div class="v2-table__body-wrapper" ref="body"
-                    :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}"
+                     :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}"
                 >
                     <table-body
-                        v-if="data && data.length > 0"
-                        :style="{ width: bodyWidth + 'px', marginTop: contentMarginTop + 'px'}" 
-                        :border="border"
-                        :columns="columns" 
-                        :hoverRowIndex="hoverRowIndex"
-                        :rows="rows">
+                            v-if="data && data.length > 0"
+                            :style="{ width: bodyWidth + 'px', marginTop: contentMarginTop + 'px'}"
+                            :border="border"
+                            :columns="columns"
+                            :hoverRowIndex="hoverRowIndex"
+                            :rows="rows">
                     </table-body>
-                    <div v-else 
-                        :style="{ width: bodyWidth + 'px' }" 
-                        :class="{
+                    <div v-else
+                         :style="{ width: bodyWidth + 'px' }"
+                         :class="{
                             'v2-table__empty-data': true,
                             'v2-table__empty-border': border
                         }">
@@ -53,18 +53,18 @@
                         </slot>
                     </div>
                 </div>
-                
+
                 <!-- footer -->
                 <div class="v2-table__footer-wrapper" ref="footer"
-                    :style="{width: isContainerScroll ? bodyWidth + 'px' : '100%'}"
+                     :style="{width: isContainerScroll ? bodyWidth + 'px' : '100%'}"
                 >
                     <table-footer
-                        v-if="showSummary" 
-                        v-show="data && data.length > 0" 
-                        type="normal" 
-                        :style="{ width: bodyWidth + 'px' }"
-                        :columns="columns" 
-                        :border="border">
+                            v-if="showSummary"
+                            v-show="data && data.length > 0"
+                            type="normal"
+                            :style="{ width: bodyWidth + 'px' }"
+                            :columns="columns"
+                            :border="border">
                     </table-footer>
                 </div>
 
@@ -76,15 +76,15 @@
                         'v2-table-fixed__left-empty-border': border && !data.length,
                         'v2-table-fixed__left-with-border': border && data.length
                     }
-                ]" v-if="leftColumns.length > 0" 
-                :style="[{width: fixedLeftWidth + 'px', marginLeft: selectionColumn[0] ? selectionColumn[0].width + 'px' : 0}, fixedBottom]">
+                ]" v-if="leftColumns.length > 0"
+                     :style="[{width: fixedLeftWidth + 'px', marginLeft: selectionColumn[0] ? selectionColumn[0].width + 'px' : 0}, fixedBottom]">
                     <!-- header -->
                     <div class="v2-table-fixed__header-wrapper" ref="leftHeader">
                         <table-header
-                            :style="{ width: fixedLeftWidth + 'px' }"
-                            :columns="leftColumns" 
-                            :sort="sort"
-                            :border="border">
+                                :style="{ width: fixedLeftWidth + 'px' }"
+                                :columns="leftColumns"
+                                :sort="sort"
+                                :border="border">
                         </table-header>
                     </div>
 
@@ -93,24 +93,24 @@
                         'v2-table-fixed__body-wrapper'
                     ]" ref="leftBody" :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}">
                         <table-body
-                            v-if="data && data.length > 0"
-                            :style="{ width: fixedLeftWidth + 'px', marginTop: contentMarginTop + 'px'}" 
-                            :border="border"
-                            :hoverRowIndex="hoverRowIndex"
-                            :columns="leftColumns" 
-                            :rows="rows">
+                                v-if="data && data.length > 0"
+                                :style="{ width: fixedLeftWidth + 'px', marginTop: contentMarginTop + 'px'}"
+                                :border="border"
+                                :hoverRowIndex="hoverRowIndex"
+                                :columns="leftColumns"
+                                :rows="rows">
                         </table-body>
                     </div>
 
                     <!-- footer -->
                     <div class="v2-table-fixed__footer-wrapper" ref="leftFooter">
-                        <table-footer 
-                            v-if="showSummary" 
-                            v-show="data && data.length > 0"
-                            :style="{ width: fixedLeftWidth + 'px' }" 
-                            type="left" 
-                            :columns="columns" 
-                            :border="border" >
+                        <table-footer
+                                v-if="showSummary"
+                                v-show="data && data.length > 0"
+                                :style="{ width: fixedLeftWidth + 'px' }"
+                                type="left"
+                                :columns="columns"
+                                :border="border">
                         </table-footer>
                     </div>
                 </div>
@@ -124,41 +124,41 @@
                         'v2-table-fixed__right-with-border': border && data.length
                     }
                 ]" v-if="rightColumns.length > 0"
-                :style="[{width: (fixedRightWidth + 1) + 'px'}, fixedBottom]">
-                     <!-- header -->
+                     :style="[{width: (fixedRightWidth + 1) + 'px'}, fixedBottom]">
+                    <!-- header -->
                     <div class="v2-table-fixed__header-wrapper" ref="rightHeader">
                         <table-header
-                            :style="{ width: fixedRightWidth + 'px' }"
-                            :columns="rightColumns" 
-                            :sort="sort"
-                            :border="border">
+                                :style="{ width: fixedRightWidth + 'px' }"
+                                :columns="rightColumns"
+                                :sort="sort"
+                                :border="border">
                         </table-header>
                     </div>
 
                     <!-- body -->
                     <div :class="[
                         'v2-table-fixed__body-wrapper'
-                    ]" 
-                    ref="rightBody" :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}">
+                    ]"
+                         ref="rightBody" :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}">
                         <table-body
-                            v-if="data && data.length > 0"
-                            :style="{ width: fixedRightWidth + 'px', marginTop: contentMarginTop + 'px'}" 
-                            :border="border"
-                            :hoverRowIndex="hoverRowIndex"
-                            :columns="rightColumns" 
-                            :rows="rows">
+                                v-if="data && data.length > 0"
+                                :style="{ width: fixedRightWidth + 'px', marginTop: contentMarginTop + 'px'}"
+                                :border="border"
+                                :hoverRowIndex="hoverRowIndex"
+                                :columns="rightColumns"
+                                :rows="rows">
                         </table-body>
                     </div>
 
                     <!-- footer -->
                     <div class="v2-table-fixed__footer-wrapper" ref="rightFooter">
-                        <table-footer 
-                            v-if="showSummary" 
-                            v-show="data && data.length > 0"
-                            type="right" 
-                            :style="{ width: fixedRightWidth + 'px'}" 
-                            :columns="rightColumns" 
-                            :border="border">
+                        <table-footer
+                                v-if="showSummary"
+                                v-show="data && data.length > 0"
+                                type="right"
+                                :style="{ width: fixedRightWidth + 'px'}"
+                                :columns="rightColumns"
+                                :border="border">
                         </table-footer>
                     </div>
                 </div>
@@ -167,7 +167,9 @@
                 <div class="v2-table__data-loading" v-if="loading">
                     <slot name="loading">
                         <div class="v2-table__loading-spinner">
-                            <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
+                            <svg viewBox="25 25 50 50" class="circular">
+                                <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+                            </svg>
                         </div>
                     </slot>
                 </div>
@@ -175,20 +177,41 @@
             <div class="v2-table__pagination-box" v-if="shownPagination" v-show="total > 0">
                 <div class="pagination-text-info" v-if="paginationInfo.text" v-html="paginationInfo.text"></div>
                 <div class="v2-table__pagination" @click="changeCurPage">
-                    <span 
-                        :class="[
+                    <span
+                            data-page="prev"
+                            :class="[
                             'page prev-page',
                             {
                                 'disabled': curPage === 1
                             }
-                        ]"  
-                        data-page="prev"
+                        ]"
                     >
-                        {{paginationInfo.prevPageText || 'Prev'}}
+                        <template v-if="paginationInfo.prevPageText">
+                            {{paginationInfo.prevPageText}}
+                        </template>
+                        <template v-else>
+                            <svg data-page="prev" width="8px" height="15px" viewBox="0 0 8 15" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+                                <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="自查-交易员-交易账户-总览" transform="translate(-1711.000000, -1082.000000)" fill="currentColor"
+                                       fill-rule="nonzero">
+                                        <g id="right" transform="translate(670.000000, 319.000000)">
+                                            <g id="历史订阅" transform="translate(930.000000, 150.000000)">
+                                                <g id="分页/触发" transform="translate(111.000000, 610.000000)">
+                                                    <path d="M2.12820311,10.5 L7.74225601,16.4131555 C8.09187473,16.781401 8.09187473,17.3589445 7.74225601,17.7271901 L7.74225601,17.7271901 C7.41517582,18.0716963 6.87074748,18.0858228 6.52624128,17.7587426 C6.51545266,17.7484997 6.5049316,17.7379787 6.4946887,17.7271901 L0.286768364,11.1885274 C-0.0796178167,10.802621 -0.0796178167,10.197379 0.286768364,9.81147264 L6.4946887,3.27280994 C6.82176889,2.92830374 7.36619723,2.91417717 7.71070343,3.24125736 C7.72149205,3.25150026 7.73201311,3.26202133 7.74225601,3.27280994 L7.74225601,3.27280994 C8.09187473,3.64105546 8.09187473,4.21859898 7.74225601,4.5868445 L2.12820311,10.5 Z"
+                                                          id="Combined-Shape"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </template>
                     </span>
                     <ul>
-                        <li v-for="(item, index) in renderPages" 
-                            :key="index" 
+                        <li v-for="(item, index) in renderPages"
+                            :key="index"
                             :data-page="item.page"
                             :class="[
                                 'page',
@@ -200,17 +223,39 @@
                             {{item.text}}
                         </li>
                     </ul>
-                    <span 
-                        :class="[
+                    <span
+                            data-page="next"
+                            :class="[
                             'page next-page',
                             {
                                 'disabled': curPage === totalPage
                             }
-                        ]" 
-                        data-page="next"
+                        ]"
                     >
-                        {{paginationInfo.nextPageText || 'Next'}}
+                        <template v-if="paginationInfo.nextPageText">
+                            {{paginationInfo.nextPageText}}
+                        </template>
+                        <template v-else>
+                            <svg  data-page="next" width="8px" height="15px" viewBox="0 0 8 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+                                    <title>Combined Shape Copy</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="自查-交易员-交易账户-总览" transform="translate(-1964.000000, -1082.000000)" fill="currentColor" fill-rule="nonzero">
+                                            <g id="right" transform="translate(670.000000, 319.000000)">
+                                                <g id="历史订阅" transform="translate(930.000000, 150.000000)">
+                                                    <g id="分页/触发" transform="translate(111.000000, 610.000000)">
+                                                        <path d="M255.128203,10.5 L260.742256,16.4131555 C261.091875,16.781401 261.091875,17.3589445 260.742256,17.7271901 L260.742256,17.7271901 C260.415176,18.0716963 259.870747,18.0858228 259.526241,17.7587426 C259.515453,17.7484997 259.504932,17.7379787 259.494689,17.7271901 L253.286768,11.1885274 C252.920382,10.802621 252.920382,10.197379 253.286768,9.81147264 L259.494689,3.27280994 C259.821769,2.92830374 260.366197,2.91417717 260.710703,3.24125736 C260.721492,3.25150026 260.732013,3.26202133 260.742256,3.27280994 L260.742256,3.27280994 C261.091875,3.64105546 261.091875,4.21859898 260.742256,4.5868445 L255.128203,10.5 Z" id="Combined-Shape-Copy" transform="translate(257.000000, 10.500000) rotate(-180.000000) translate(-257.000000, -10.500000) "></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                        </template>
                     </span>
+                    <span class="total">共 {{total}} 条</span>
                 </div>
             </div>
         </div>
@@ -348,7 +393,7 @@
                 isIndeterminate: false,
                 hoverRowIndex: -1,
 
-                // the size of wrapper        
+                // the size of wrapper
                 containerWidth: 0,
                 containerHeight: 0,
 
@@ -439,7 +484,7 @@
         },
 
         methods: {
-            // exposed table method 
+            // exposed table method
             toggleRowSelection (row, selected) {
                 const curIndex = findIndex(this.rows, row);
 
@@ -536,7 +581,7 @@
 
                 this.curPage = parseInt(page, 10);
                 this.$emit('page-change', this.curPage);
-                
+
                 this.getRenderPages();
             },
 
@@ -544,9 +589,9 @@
                 if (this.isValidNumber(this.total)) {
                     return;
                 }
-                
+
                 const totalPage = Math.ceil(parseInt(this.total, 10) / (this.paginationInfo.pageSize || 10));
-                this.totalPage = totalPage > 1 ? totalPage : 1;                
+                this.totalPage = totalPage > 1 ? totalPage : 1;
                 this.getRenderPages();
             },
 
@@ -580,20 +625,20 @@
                 if (end !== this.totalPage) {
                     pages.push({
                         page: this.totalPage,
-                        text: (this.totalPage - end > 1 && this.totalPage > 6) 
-                            ? `...${this.totalPage}` 
+                        text: (this.totalPage - end > 1 && this.totalPage > 6)
+                            ? `...${this.totalPage}`
                             : this.totalPage
                     });
                 }
 
-                this.renderPages = [].concat(pages);   
+                this.renderPages = [].concat(pages);
             },
 
             // 更新 scroll value
             updateScrollValue () {
                 const ele = this.scrollbar.element;
                 const { header, leftBody, rightBody, footer } = this.$refs;
-                
+
                 if (!this.isContainerScroll) {
                     header.scrollLeft = ele.scrollLeft;
                 }
@@ -609,7 +654,7 @@
                 if (footer) {
                     footer.scrollLeft = ele.scrollLeft;
                 }
-                
+
                 this.scrollTop = ele.scrollTop;
                 this.scrollLeft = ele.scrollLeft;
             },
@@ -623,19 +668,19 @@
                 switch (type) {
                     case 'selection':
                         cols = columns.filter(column => column.type === 'selection');
-                        cols = cols.length > 1 ? [cols[0]] : cols; 
+                        cols = cols.length > 1 ? [cols[0]] : cols;
                         break;
                     case 'left':
                         cols = columns.filter(column => (column.fixed === 'left' && column.type !== 'selection'));
                         break;
                     case 'right':
                         cols = columns.filter(column => (column.fixed === 'right' && column.type !== 'selection'));
-                        break;  
+                        break;
                     default:
                         cols = columns.filter(column => {
                             return !['left', 'right'].includes(column.fixed) && column.type !== 'selection';
                         });
-                        break;  
+                        break;
                 }
 
                 return cols;
@@ -665,7 +710,7 @@
                     const delIndex = this.selectedIndex.indexOf(rowIndex);
                     this.selectedIndex.splice(delIndex, 1);
                 }
-            
+
                 this.isAll = this.selectedIndex.length === this.data.length;
                 this.isIndeterminate = this.selectedIndex.length > 0 && !this.isAll;
                 this.$nextTick(() => {
@@ -702,9 +747,9 @@
             getRenderRows () {
                 const list = [];
 
-                const from = Math.floor(this.scrollTop / this.rh); 
+                const from = Math.floor(this.scrollTop / this.rh);
                 const to = Math.ceil((this.scrollTop + this.tbodyHeight) / this.rh);
-                
+
                 for (let i = from; i < to; i++) {
                     if (typeof this.data[i] !== 'undefined') {
                         list.push(Object.assign({}, this.data[i], {
@@ -732,7 +777,7 @@
                 } else {
                     allColumns = [].concat(columns);
                 }
-                
+
                 if (!this.flexColumnIndexs) {
                     // 未指定 width 属性的弹性列
                     flexColumnIndexs = allColumns.map((col, index) => {
@@ -799,9 +844,9 @@
 
                 this.containerWidth = this.$el.clientWidth;
                 this.containerHeight = this.$el.clientHeight;
-                
+
                 this.columns = [].concat(this.updateColumnsWidth(this.columns));
-                
+
                 if (this.rightColumns.length) {
                     this.rightColumns = [].concat(this.getColumnComponentsByType(this.columns, 'right'));
                 }
@@ -833,7 +878,7 @@
             if (!Bus._Vue) {
                 throw new Error('[v2-table]: Must be call Vue.use(v2-table) before used');
             }
-            
+
             this.containerWidth = this.$el.clientWidth;
             this.containerHeight = this.$el.clientHeight;
 
@@ -874,7 +919,7 @@
             this.container = this.isContainerScroll ? this.$refs.container : this.$refs.body;
             this.container.addEventListener('bs-update-scroll-value', this.updateScroll, false);
             window.addEventListener('resize', this.winResize, false);
-            
+
             this.createScrollBar();
         },
 

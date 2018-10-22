@@ -25,13 +25,13 @@ export default {
         getColStyle (col) {
             const style = {};
             style.width = `${col.$realWidth}px`;
-            
+
             return style;
         },
 
         getRowClass (index) {
             const cls = ['v2-table__row'];
-            if (this.table.stripe && (index + 1) % 2 === 0) {
+            if (this.table.stripe && (index + 1) % 2 === 1) {
                 cls.push('v2-table__row-striped');
             }
 
@@ -65,14 +65,14 @@ export default {
                     {
                         this.rows.map((row, i) => {
                             return (
-                                <tr 
+                                <tr
                                     on-mouseenter={ () => this.table.hoverRowIndex = i }
                                     on-mouseleave={ () => this.table.hoverRowIndex = -1 }
                                     class={ this.getRowClass(i) }>
                                     {
                                         this.columns.map((col, j) => {
                                             return (
-                                                <table-cell 
+                                                <table-cell
                                                     column={col}
                                                     rowIndex={i}
                                                     height={this.table.cellHeight}
