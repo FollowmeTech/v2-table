@@ -3,17 +3,18 @@ import CheckBox from './checkbox.vue';
 export default {
     functional: true,
 
-    props: ['column', 'row', 'rowIndex', 'height'],
+    props: ['column', 'row', 'rowIndex', 'height', 'hovering'],
 
     render (createElement, context) {
         const { props } = context;
-        const { row, column, rowIndex, height } = props;
-
+        const { row, column, rowIndex, height, hovering } = props;
+        console.log(hovering);
         const data = {
             class: {
                 'v2-table__cell': true,
                 'text-left': column.align === 'left',
-                'text-right': column.align === 'right'
+                'text-right': column.align === 'right',
+                'column-hover': hovering
             },
             style: {
                 'height': height + 'px'

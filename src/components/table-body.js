@@ -12,6 +12,7 @@ export default {
             default: () => []
         },
         hoverRowIndex: [Number],
+        hoverColumnIndex: [Number],
         border: [Boolean]
     },
 
@@ -75,6 +76,7 @@ export default {
                                                 <table-cell
                                                     column={col}
                                                     rowIndex={i}
+                                                    hovering={j === this.table.hoverColumnIndex}
                                                     height={this.table.cellHeight}
                                                     row={row}>
                                                 </table-cell>

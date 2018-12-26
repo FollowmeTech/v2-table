@@ -22,7 +22,8 @@
                             :style="{ width: bodyWidth + 'px' }"
                             :columns="columns"
                             :sort="sort"
-                            :border="border">
+                            :border="border"
+                    >
                     </table-header>
                 </div>
 
@@ -37,7 +38,9 @@
                             :border="border"
                             :columns="columns"
                             :hoverRowIndex="hoverRowIndex"
-                            :rows="rows">
+                            :rows="rows"
+                            :hoverColumnIndex="hoverColumnIndex"
+                    >
                     </table-body>
                     <div v-else
                          :style="{ width: bodyWidth + 'px' }"
@@ -64,7 +67,9 @@
                             type="normal"
                             :style="{ width: bodyWidth + 'px' }"
                             :columns="columns"
-                            :border="border">
+                            :border="border"
+                            :hoverColumnIndex="hoverColumnIndex"
+                    >
                     </table-footer>
                 </div>
 
@@ -84,7 +89,8 @@
                                 :style="{ width: fixedLeftWidth + 'px' }"
                                 :columns="leftColumns"
                                 :sort="sort"
-                                :border="border">
+                                :border="border"
+                        >
                         </table-header>
                     </div>
 
@@ -98,7 +104,9 @@
                                 :border="border"
                                 :hoverRowIndex="hoverRowIndex"
                                 :columns="leftColumns"
-                                :rows="rows">
+                                :rows="rows"
+                                :hoverColumnIndex="hoverColumnIndex"
+                        >
                         </table-body>
                     </div>
 
@@ -131,7 +139,8 @@
                                 :style="{ width: fixedRightWidth + 'px' }"
                                 :columns="rightColumns"
                                 :sort="sort"
-                                :border="border">
+                                :border="border"
+                        >
                         </table-header>
                     </div>
 
@@ -146,6 +155,7 @@
                                 :border="border"
                                 :hoverRowIndex="hoverRowIndex"
                                 :columns="rightColumns"
+                                :hoverColumnIndex="hoverColumnIndex"
                                 :rows="rows">
                         </table-body>
                     </div>
@@ -179,6 +189,7 @@
                 <div class="v2-table__pagination" @click="changeCurPage">
                     <span
                             data-page="prev"
+                            v-if="curPage !== 1"
                             :class="[
                             'page prev-page',
                             {
@@ -194,7 +205,8 @@
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
                                 <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="自查-交易员-交易账户-总览" transform="translate(-1711.000000, -1082.000000)" fill="currentColor"
+                                    <g id="自查-交易员-交易账户-总览" transform="translate(-1711.000000, -1082.000000)"
+                                       fill="currentColor"
                                        fill-rule="nonzero">
                                         <g id="right" transform="translate(670.000000, 319.000000)">
                                             <g id="历史订阅" transform="translate(930.000000, 150.000000)">
@@ -216,7 +228,8 @@
                             :class="[
                                 'page',
                                 {
-                                    'cur-page': curPage === item.page
+                                    'cur-page': curPage === item.page,
+                                    'disabled': +item.page < 0,
                                 }
                             ]"
                         >
@@ -225,6 +238,7 @@
                     </ul>
                     <span
                             data-page="next"
+                            v-if="curPage !== totalPage"
                             :class="[
                             'page next-page',
                             {
@@ -236,17 +250,21 @@
                             {{paginationInfo.nextPageText}}
                         </template>
                         <template v-else>
-                            <svg  data-page="next" width="8px" height="15px" viewBox="0 0 8 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg data-page="next" width="8px" height="15px" viewBox="0 0 8 15" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
                                     <title>Combined Shape Copy</title>
                                     <desc>Created with Sketch.</desc>
                                     <defs></defs>
                                     <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="自查-交易员-交易账户-总览" transform="translate(-1964.000000, -1082.000000)" fill="currentColor" fill-rule="nonzero">
+                                        <g id="自查-交易员-交易账户-总览" transform="translate(-1964.000000, -1082.000000)"
+                                           fill="currentColor" fill-rule="nonzero">
                                             <g id="right" transform="translate(670.000000, 319.000000)">
                                                 <g id="历史订阅" transform="translate(930.000000, 150.000000)">
                                                     <g id="分页/触发" transform="translate(111.000000, 610.000000)">
-                                                        <path d="M255.128203,10.5 L260.742256,16.4131555 C261.091875,16.781401 261.091875,17.3589445 260.742256,17.7271901 L260.742256,17.7271901 C260.415176,18.0716963 259.870747,18.0858228 259.526241,17.7587426 C259.515453,17.7484997 259.504932,17.7379787 259.494689,17.7271901 L253.286768,11.1885274 C252.920382,10.802621 252.920382,10.197379 253.286768,9.81147264 L259.494689,3.27280994 C259.821769,2.92830374 260.366197,2.91417717 260.710703,3.24125736 C260.721492,3.25150026 260.732013,3.26202133 260.742256,3.27280994 L260.742256,3.27280994 C261.091875,3.64105546 261.091875,4.21859898 260.742256,4.5868445 L255.128203,10.5 Z" id="Combined-Shape-Copy" transform="translate(257.000000, 10.500000) rotate(-180.000000) translate(-257.000000, -10.500000) "></path>
+                                                        <path d="M255.128203,10.5 L260.742256,16.4131555 C261.091875,16.781401 261.091875,17.3589445 260.742256,17.7271901 L260.742256,17.7271901 C260.415176,18.0716963 259.870747,18.0858228 259.526241,17.7587426 C259.515453,17.7484997 259.504932,17.7379787 259.494689,17.7271901 L253.286768,11.1885274 C252.920382,10.802621 252.920382,10.197379 253.286768,9.81147264 L259.494689,3.27280994 C259.821769,2.92830374 260.366197,2.91417717 260.710703,3.24125736 C260.721492,3.25150026 260.732013,3.26202133 260.742256,3.27280994 L260.742256,3.27280994 C261.091875,3.64105546 261.091875,4.21859898 260.742256,4.5868445 L255.128203,10.5 Z"
+                                                              id="Combined-Shape-Copy"
+                                                              transform="translate(257.000000, 10.500000) rotate(-180.000000) translate(-257.000000, -10.500000) "></path>
                                                     </g>
                                                 </g>
                                             </g>
@@ -255,7 +273,7 @@
                                 </svg>
                         </template>
                     </span>
-                    <span class="total">{{renderTotal(total)}}</span>
+                    <span class="total" v-if="showTotal">{{renderTotal(total)}}</span>
                 </div>
             </div>
         </div>
@@ -285,7 +303,12 @@
                 default: () => [],
                 required: true
             },
-
+            showTotal: {
+                type: Boolean,
+                default () {
+                    return false;
+                }
+            },
             defaultSort: {
                 type: Object,
                 default: () => {
@@ -397,6 +420,7 @@
                 selectedIndex: [],
                 isAll: false,
                 isIndeterminate: false,
+                hoverColumnIndex: -1,
                 hoverRowIndex: -1,
 
                 // the size of wrapper
@@ -490,6 +514,9 @@
         },
 
         methods: {
+            onToggleHover (index) {
+                this.hoverColumnIndex = this.hoverColumnIndex === index ? -1 : this.hoverColumnIndex;
+            },
             // exposed table method
             toggleRowSelection (row, selected) {
                 const curIndex = findIndex(this.rows, row);
@@ -570,7 +597,7 @@
             changeCurPage (e) {
                 let page = e.target.dataset ? e.target.dataset.page : e.target.getAttribute('data-page');
 
-                if (!page) {
+                if (!page || +page < 0) {
                     return;
                 }
                 if (page === 'prev') {
@@ -622,18 +649,28 @@
                     });
                 }
                 if (start !== 1) {
+                    if (start - 1 > 1) {
+                        pages.unshift({
+                            page: -1,
+                            text: '...'
+                        });
+                    }
                     pages.unshift({
                         page: 1,
-                        text: start - 1 > 1 ? `...1` : 1
+                        text: 1
                     });
                 }
 
                 if (end !== this.totalPage) {
+                    if (this.totalPage - end > 1 && this.totalPage > 6) {
+                        pages.push({
+                            page: -1,
+                            text: '...'
+                        });
+                    }
                     pages.push({
                         page: this.totalPage,
-                        text: (this.totalPage - end > 1 && this.totalPage > 6)
-                            ? `...${this.totalPage}`
-                            : this.totalPage
+                        text: this.totalPage
                     });
                 }
 
