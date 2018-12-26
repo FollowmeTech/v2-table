@@ -255,7 +255,7 @@
                                 </svg>
                         </template>
                     </span>
-                    <span class="total">共 {{total}} 条</span>
+                    <span class="total">{{renderTotal(total)}}</span>
                 </div>
             </div>
         </div>
@@ -370,6 +370,12 @@
             lazyLoad: {
                 type: Boolean,
                 default: false
+            },
+            renderTotal: {
+                type: Function,
+                default: (total) => {
+                    return `共 ${total} 条`;
+                }
             }
         },
 

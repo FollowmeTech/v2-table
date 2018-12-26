@@ -969,6 +969,7 @@ Sort the data to find or compare data quickly./对表格进行排序，可快速
     :loading="loading" 
     :total="total"
     :shown-pagination="true"
+    :render-total="(total) => (`一共${total}条`)"
     :pagination-info="paginationInfo"
     @page-change="handlePageChange">
     <v2-table-column label="Name" prop="name"></v2-table-column>
