@@ -77,6 +77,9 @@ export default {
                                     displayOrderIcon = true;
                                     order = this.sort.order || 'ascending';
                                 }
+                                const sortIconSrc = order === 'ascending'
+                                    ? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxMCAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4zIDUuN0w1LjU4MyAyLjk4M3Y3LjcyNUg0LjQxN1YyLjk4M0wxLjcgNS43bC0uODI1LS44MjUgMy4zLTMuM0w1IC43NWwuODI1LjgyNSAzLjMgMy4zeiIgZmlsbD0iI0ZGNjIwMCIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+'
+                                    : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxMCAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4zIDUuNzU4TDUuNTgzIDguNDc1Vi43NUg0LjQxN3Y3LjcyNUwxLjcgNS43NThsLS44MjUuODI1IDMuMyAzLjMuODI1LjgyNS44MjUtLjgyNSAzLjMtMy4zeiIgZmlsbD0iI0ZGNjIwMCIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+';
                                 return (
                                     <th key={index}
                                         on-mouseenter={() => this.table.hoverColumnIndex = index}
@@ -94,7 +97,7 @@ export default {
                                         {
                                             column.sortable && !column.type && displayOrderIcon
                                                 ? <span class={['v2-table__caret-wrapper', order]} >
-                                                    <img src='data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZS8+PC9kZWZzPjxwYXRoIGQ9Ik01MTIgODUuMzMzcTE4LjAwNSAwIDMwLjMzNiAxMi4zMzFsMjk4LjY2NyAyOTguNjY3cTEyLjMzIDEyLjMzIDEyLjMzIDMwLjMzNiAwIDE4LjM0Ni0xMi4xNiAzMC41MDZ0LTMwLjUwNiAxMi4xNnEtMTguMDA2IDAtMzAuMzM2LTEyLjMzTDU1NC42NjcgMjMwLjk5N1Y4OTZxMCAxNy42NjQtMTIuNTAyIDMwLjE2NVQ1MTIgOTM4LjY2N3QtMzAuMTY1LTEyLjUwMlQ0NjkuMzMzIDg5NlYyMzAuOTk3TDI0My42NyA0NTcuMDAzcS0xMi4zMyAxMi4zMy0zMC4zMzYgMTIuMzMtMTguMzQ2IDAtMzAuNTA2LTEyLjE2dC0xMi4xNi0zMC41MDZxMC0xOC4wMDYgMTIuMzMtMzAuMzM2TDQ4MS42NjQgOTcuNjY0cTEyLjMzLTEyLjMzIDMwLjMzNi0xMi4zM3oiIGZpbGw9IiNmZjYyMDAiLz48L3N2Zz4='/>
+                                                    <img src={sortIconSrc}/>
                                                 </span>
                                                 : ''
                                         }
