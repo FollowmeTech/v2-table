@@ -40,7 +40,9 @@ export default {
             return createElement('td', data, [createElement('div', {
                 class: {
                     'cell': true
-                }
+                },
+                // cell 可以指定style
+                style: column.customStyle ? column.customStyle : {}
             }, column.$scopedSlots.default({
                 row: row,
                 index: rowIndex

@@ -19,13 +19,21 @@
             fixed: {
                 type: String,
                 default: '' // left/right
-            }, 
+            },
             align: {
                 type: String,
                 default: 'center',
                 validator: (val) => ['left', 'center', 'right'].indexOf(val) > -1
             },
-            renderHeader: [Function]
+            renderHeader: [Function],
+            customStyle: {
+                type: Object,
+                default: () => {
+                    return {
+                        padding: '0 10px'
+                    };
+                }
+            }
         }
     };
 </script>

@@ -697,7 +697,7 @@ Custom the display content of the column/自定义列表的显示内容
       </template>
     </v2-table-column>
     <v2-table-column label="Address" prop="address" width="150" align="right"></v2-table-column>
-    <v2-table-column label="Birthday" prop="birthDay" width="110">
+    <v2-table-column label="Birthday" prop="birthDay" :custom-style="{padding: 0}" width="110">
       <template slot-scope="scope">
         <div class="custom-display-date">{{scope.row.birthDay | formatDate}}</div> 
       </template>
