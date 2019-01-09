@@ -943,7 +943,7 @@ Sort the data to find or compare data quickly./对表格进行排序，可快速
 
 ```html
 <template>
-  <v2-table :data="[]" border>
+  <v2-table :data="[]" height="550" :loading="false" border>
     <!-- <div slot="empty">custom empty component</div> -->
     <v2-table-column label="Name" prop="name"></v2-table-column>
     <v2-table-column label="Date" prop="date"></v2-table-column>
@@ -954,6 +954,17 @@ Sort the data to find or compare data quickly./对表格进行排序，可快速
     <v2-table-column label="City" prop="city"></v2-table-column>
     <v2-table-column label="Country" prop="country"></v2-table-column>
     <v2-table-column label="Age" prop="age"></v2-table-column>
+    <div slot="loading" style="
+        margin-top: 50px;
+        background: linear-gradient(#f9f9f9 50%, #fff 50%); background-size: 20% 20%;
+        height: 500px">
+        loading
+    </div>
+        <div slot="empty" style="
+            background: linear-gradient(#f9f9f9 50%, #fff 50%); background-size: 20% 20%;
+            height: 500px">
+            empty data
+        </div>
   </v2-table>  
 </template>
 ```
@@ -966,7 +977,7 @@ Sort the data to find or compare data quickly./对表格进行排序，可快速
 ```html
 <template>
   <v2-table :data="list4" border 
-    :loading="loading" 
+    :loading="true" 
     :total="total"
     :shown-pagination="true"
     :render-total="(total) => (`一共${total}条`)"

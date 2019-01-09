@@ -33,7 +33,7 @@
                      :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}"
                 >
                     <table-body
-                            v-if="data && data.length > 0"
+                            v-if="data && data.length > 0 && !loading"
                             :style="{ width: bodyWidth + 'px', marginTop: contentMarginTop + 'px'}"
                             :border="border"
                             :columns="columns"
@@ -42,7 +42,7 @@
                             :hoverColumnIndex="hoverColumnIndex"
                     >
                     </table-body>
-                    <div v-else
+                    <div v-else-if="!loading"
                          :style="{ width: bodyWidth + 'px' }"
                          :class="{
                             'v2-table__empty-data': true,
@@ -52,6 +52,16 @@
                             <div class="v2-table__empty-default">
                                 <empty-icon></empty-icon>
                                 <span class="v2-table__empty-text" v-text="emptyText"></span>
+                            </div>
+                        </slot>
+                    </div>
+                    <!-- Table loading -->
+                    <div class="v2-table__data-loading" :class="{'remove-bg': $slots.loading}" v-if="loading">
+                        <slot name="loading">
+                            <div class="v2-table__loading-spinner">
+                                <svg viewBox="25 25 50 50" class="circular">
+                                    <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+                                </svg>
                             </div>
                         </slot>
                     </div>
@@ -99,7 +109,7 @@
                         'v2-table-fixed__body-wrapper'
                     ]" ref="leftBody" :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}">
                         <table-body
-                                v-if="data && data.length > 0"
+                                v-if="data && data.length > 0 && !loading"
                                 :style="{ width: fixedLeftWidth + 'px', marginTop: contentMarginTop + 'px'}"
                                 :border="border"
                                 :hoverRowIndex="hoverRowIndex"
@@ -150,7 +160,7 @@
                     ]"
                          ref="rightBody" :style="{ height: bodyHeight ? bodyHeight + 'px' : 'auto'}">
                         <table-body
-                                v-if="data && data.length > 0"
+                                v-if="data && data.length > 0 && !loading"
                                 :style="{ width: fixedRightWidth + 'px', marginTop: contentMarginTop + 'px'}"
                                 :border="border"
                                 :hoverRowIndex="hoverRowIndex"
@@ -173,16 +183,6 @@
                     </div>
                 </div>
 
-                <!-- Table loading -->
-                <div class="v2-table__data-loading" v-if="loading">
-                    <slot name="loading">
-                        <div class="v2-table__loading-spinner">
-                            <svg viewBox="25 25 50 50" class="circular">
-                                <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
-                            </svg>
-                        </div>
-                    </slot>
-                </div>
             </div>
             <div class="v2-table__pagination-box" v-if="shownPagination" v-show="total > 0">
                 <div class="pagination-text-info" v-if="paginationInfo.text" v-html="paginationInfo.text"></div>
@@ -201,24 +201,7 @@
                             {{paginationInfo.prevPageText}}
                         </template>
                         <template v-else>
-                            <svg data-page="prev" width="8px" height="15px" viewBox="0 0 8 15" version="1.1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
-                                <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="自查-交易员-交易账户-总览" transform="translate(-1711.000000, -1082.000000)"
-                                       fill="currentColor"
-                                       fill-rule="nonzero">
-                                        <g id="right" transform="translate(670.000000, 319.000000)">
-                                            <g id="历史订阅" transform="translate(930.000000, 150.000000)">
-                                                <g id="分页/触发" transform="translate(111.000000, 610.000000)">
-                                                    <path d="M2.12820311,10.5 L7.74225601,16.4131555 C8.09187473,16.781401 8.09187473,17.3589445 7.74225601,17.7271901 L7.74225601,17.7271901 C7.41517582,18.0716963 6.87074748,18.0858228 6.52624128,17.7587426 C6.51545266,17.7484997 6.5049316,17.7379787 6.4946887,17.7271901 L0.286768364,11.1885274 C-0.0796178167,10.802621 -0.0796178167,10.197379 0.286768364,9.81147264 L6.4946887,3.27280994 C6.82176889,2.92830374 7.36619723,2.91417717 7.71070343,3.24125736 C7.72149205,3.25150026 7.73201311,3.26202133 7.74225601,3.27280994 L7.74225601,3.27280994 C8.09187473,3.64105546 8.09187473,4.21859898 7.74225601,4.5868445 L2.12820311,10.5 Z"
-                                                          id="Combined-Shape"></path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
+                            <img style="vertical-align: sub" data-page="next" src="data:image/svg+xml;base64,PHN2ZyBkYXRhLXBhZ2U9InByZXYiIHdpZHRoPSI4IiBoZWlnaHQ9IjE1IiB2aWV3Qm94PSIwIDAgOCAxNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMi4xMjggNy41bDUuNjE0IDUuOTEzYy4zNS4zNjguMzUuOTQ2IDAgMS4zMTRhLjg2Ljg2IDAgMCAxLTEuMjQ3IDBMLjI4NyA4LjE5YTEgMSAwIDAgMSAwLTEuMzc4TDYuNDk1LjI3M2EuODYuODYgMCAwIDEgMS4yNDcgMGMuMzUuMzY4LjM1Ljk0NiAwIDEuMzE0TDIuMTI4IDcuNXoiIGZpbGw9IiM3Njc2NzYiIGZpbGwtcnVsZT0ibm9uemVybyIvPjwvc3ZnPg==" alt="">
                         </template>
                     </span>
                     <ul>
@@ -250,27 +233,7 @@
                             {{paginationInfo.nextPageText}}
                         </template>
                         <template v-else>
-                            <svg data-page="next" width="8px" height="15px" viewBox="0 0 8 15" version="1.1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
-                                    <title>Combined Shape Copy</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <defs></defs>
-                                    <g id="策略市场" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="自查-交易员-交易账户-总览" transform="translate(-1964.000000, -1082.000000)"
-                                           fill="currentColor" fill-rule="nonzero">
-                                            <g id="right" transform="translate(670.000000, 319.000000)">
-                                                <g id="历史订阅" transform="translate(930.000000, 150.000000)">
-                                                    <g id="分页/触发" transform="translate(111.000000, 610.000000)">
-                                                        <path d="M255.128203,10.5 L260.742256,16.4131555 C261.091875,16.781401 261.091875,17.3589445 260.742256,17.7271901 L260.742256,17.7271901 C260.415176,18.0716963 259.870747,18.0858228 259.526241,17.7587426 C259.515453,17.7484997 259.504932,17.7379787 259.494689,17.7271901 L253.286768,11.1885274 C252.920382,10.802621 252.920382,10.197379 253.286768,9.81147264 L259.494689,3.27280994 C259.821769,2.92830374 260.366197,2.91417717 260.710703,3.24125736 C260.721492,3.25150026 260.732013,3.26202133 260.742256,3.27280994 L260.742256,3.27280994 C261.091875,3.64105546 261.091875,4.21859898 260.742256,4.5868445 L255.128203,10.5 Z"
-                                                              id="Combined-Shape-Copy"
-                                                              transform="translate(257.000000, 10.500000) rotate(-180.000000) translate(-257.000000, -10.500000) "></path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
+                            <img style="vertical-align: sub" data-page="next" src="data:image/svg+xml;base64,PHN2ZyBkYXRhLXBhZ2U9Im5leHQiIHdpZHRoPSI4IiBoZWlnaHQ9IjE1IiB2aWV3Qm94PSIwIDAgOCAxNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNS44NzIgNy41TC4yNTggMS41ODdhLjk1NC45NTQgMCAwIDEgMC0xLjMxNC44Ni44NiAwIDAgMSAxLjI0NyAwTDcuNzEzIDYuODFhMSAxIDAgMCAxIDAgMS4zNzhsLTYuMjA4IDYuNTM4YS44Ni44NiAwIDAgMS0xLjI0NyAwIC45NTQuOTU0IDAgMCAxIDAtMS4zMTRMNS44NzIgNy41eiIgZmlsbD0iIzc2NzY3NiIgZmlsbC1ydWxlPSJub256ZXJvIi8+PC9zdmc+" alt="">
                         </template>
                     </span>
                     <span class="total" v-if="showTotal">{{renderTotal(total)}}</span>

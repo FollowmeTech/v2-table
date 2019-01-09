@@ -1,6 +1,6 @@
 {
   "name": "@fmfe/v2-table",
-  "version": "3.0.13",
+  "version": "3.0.17",
   "description": "A simple table component based Vue 2.x",
   "author": "dwqs",
   "license": "MIT",
@@ -41,8 +41,8 @@
     "lodash.findindex": "^4.6.0"
   },
   "peerDependencies": {
-    "vue": ">= 2.5.0",
-    "beautify-scrollbar": ">=1.0.5"
+    "beautify-scrollbar": ">=1.0.5",
+    "vue": ">= 2.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^5.2.8",
