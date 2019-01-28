@@ -308,8 +308,8 @@
                     return {
                         text: '',
                         pageSize: 10,
-                        nextPageText: 'Next',
-                        prePageText: 'Prev'
+                        nextPageText: '',
+                        prePageText: ''
                     };
                 }
             },
